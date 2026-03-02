@@ -7,11 +7,13 @@ In many public grievance systems across India, including state helplines and mun
 
 However, existing systems face several critical challenges:
 
-1️⃣ **Lack of Intelligent Prioritization.**
-2️⃣ **Manual Classification & Routing.**
-3️⃣ **No Sentiment or Severity Analysis.**
-4️⃣ **Limited Transparency & Tracking.**
-5️⃣ **Scalability Issues.**
+### Key Challenges
+
+1. **Lack of Intelligent Prioritization**
+2. **Manual Classification & Routing**
+3. **No Sentiment or Severity Analysis**
+4. **Limited Transparency & Tracking**
+5. **Scalability Issues**
 
 ## 💡 Solution
 
