@@ -93,35 +93,14 @@ Here’s a clean, professional **Tech Stack section** ready to paste into your R
 ---
 
 
-## 📊 System Architecture
-┌────────────────────┐
-│      Frontend      │
-│     (React UI)     │
-└─────────┬──────────┘
-          │ API Calls
-          ▼
-┌────────────────────┐
-│     Backend API    │
-│    (FastAPI)       │
-└─────────┬──────────┘
-          │
-   ┌──────┴───────────────┐
-   │                      │
-   ▼                      ▼
-┌───────────────┐   ┌────────────────┐
-│ PostgreSQL    │   │   MongoDB      │
-│ (Structured   │   │ (Complaints +  │
-│  Data)        │   │  AI Metadata)  │
-└───────────────┘   └────────────────┘
-          │
-          ▼
-┌────────────────────┐
-│    AI Engine       │
-│ (NLP + Sentiment + │
-│   RAG Processing)  │
-└────────────────────┘
+## 🏗 System Architecture
 
-
-## 🚀 Installation Guide
+```mermaid
+graph TD
+    A[React Frontend] -->|API Calls| B[FastAPI Backend]
+    B --> C[PostgreSQL - Structured Data]
+    B --> D[MongoDB - Complaints + AI Metadata]
+    B --> E[AI Engine - NLP + Sentiment + RAG]
+```
 
 ## 👥 Team: Ascendrix
