@@ -1,0 +1,183 @@
+"use client";
+
+import { useState } from "react";
+
+const categories = ["Electricity", "Water", "Road", "Other"];
+
+export default function SubmitPage() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    category: "",
+    title: "",
+    description: "",
+  });
+
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e: any) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleCategorySelect = (cat: string) => {
+    setForm({ ...form, category: cat });
+    setOpen(false);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    if (!form.name || !form.email || !form.category || !form.title || !form.description) {
+      setError("Please fill all required fields");
+      return;
+    }
+
+    setError("");
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0B0F19] text-white flex items-center justify-center px-4 py-10 relative">
+
+      {/* Glow background */}
+      <div className="absolute inset-0 flex justify-center items-center -z-10">
+        <div className="w-[500px] h-[500px] bg-indigo-600 opacity-20 blur-3xl rounded-full"></div>
+      </div>
+
+      <div className="w-full max-w-3xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 shadow-lg">
+
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Submit Your Grievance
+        </h1>
+
+        {submitted ? (
+          <div className="text-center">
+            <h2 className="text-2xl text-green-400 font-semibold mb-4">
+              ✅ Grievance Submitted!
+            </h2>
+            <p className="text-gray-400">
+              Your complaint has been recorded successfully.
+            </p>
+          </div>
+        ) : (
+          <form className="space-y-6" onSubmit={handleSubmit}>
+
+            {/* Error */}
+            {error && (
+              <div className="bg-red-500/20 text-red-400 p-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* Full Name */}
+            <div>
+              <label className="block mb-2 text-sm text-gray-300">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block mb-2 text-sm text-gray-300">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
+            {/* Category (Custom Dropdown) */}
+            <div className="relative">
+              <label className="block mb-2 text-sm text-gray-300">Category</label>
+
+              <div
+                onClick={() => setOpen(!open)}
+                className="w-full p-3 rounded-lg bg-[#1A1F2E] border border-gray-600 cursor-pointer flex justify-between items-center"
+              >
+                <span className={form.category ? "text-white" : "text-gray-400"}>
+                  {form.category || "Select category"}
+                </span>
+                <span>▼</span>
+              </div>
+
+              {open && (
+                <div className="absolute w-full mt-2 bg-[#1A1F2E] border border-gray-600 rounded-lg shadow-lg z-50">
+                  {categories.map((cat) => (
+                    <div
+                      key={cat}
+                      onClick={() => handleCategorySelect(cat)}
+                      className="p-3 hover:bg-indigo-600 cursor-pointer"
+                    >
+                      {cat}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Title */}
+            <div>
+              <label className="block mb-2 text-sm text-gray-300">
+                Grievance Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                placeholder="Short title"
+                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
+            {/* Description */}
+            <div>
+              <label className="block mb-2 text-sm text-gray-300">
+                Description
+              </label>
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                rows={5}
+                placeholder="Describe your issue..."
+                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
+            {/* File Upload */}
+            <div>
+              <label className="block mb-2 text-sm text-gray-300">
+                Upload File (optional)
+              </label>
+              <input
+                type="file"
+                className="w-full text-gray-400 file:bg-indigo-600 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg hover:file:bg-indigo-700"
+              />
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 py-3 rounded-xl hover:scale-105 hover:shadow-lg transition text-lg font-semibold"
+            >
+              Submit Grievance
+            </button>
+
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
