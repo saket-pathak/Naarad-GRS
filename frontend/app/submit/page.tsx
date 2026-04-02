@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
+import Toast from "@/components/ui/Toast";
 
 const categories = ["Electricity", "Water", "Road", "Other"];
 
@@ -41,7 +44,7 @@ export default function SubmitPage() {
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white flex items-center justify-center px-4 py-10 relative">
 
-      {/* Glow background */}
+      {/* Glow */}
       <div className="absolute inset-0 flex justify-center items-center -z-10">
         <div className="w-[500px] h-[500px] bg-indigo-600 opacity-20 blur-3xl rounded-full"></div>
       </div>
@@ -64,40 +67,28 @@ export default function SubmitPage() {
         ) : (
           <form className="space-y-6" onSubmit={handleSubmit}>
 
-            {/* Error */}
-            {error && (
-              <div className="bg-red-500/20 text-red-400 p-3 rounded-lg text-sm">
-                {error}
-              </div>
-            )}
+            {/* Toast Error */}
+            {error && <Toast message={error} type="error" />}
 
-            {/* Full Name */}
-            <div>
-              <label className="block mb-2 text-sm text-gray-300">Full Name</label>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Enter your name"
-                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
+            {/* Name */}
+            <Input
+              label="Full Name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Enter your name"
+            />
 
             {/* Email */}
-            <div>
-              <label className="block mb-2 text-sm text-gray-300">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
+            <Input
+              label="Email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+            />
 
-            {/* Category (Custom Dropdown) */}
+            {/* Category */}
             <div className="relative">
               <label className="block mb-2 text-sm text-gray-300">Category</label>
 
@@ -127,19 +118,13 @@ export default function SubmitPage() {
             </div>
 
             {/* Title */}
-            <div>
-              <label className="block mb-2 text-sm text-gray-300">
-                Grievance Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                value={form.title}
-                onChange={handleChange}
-                placeholder="Short title"
-                className="w-full p-3 rounded-lg bg-[#1A1F2E] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
+            <Input
+              label="Grievance Title"
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              placeholder="Short title"
+            />
 
             {/* Description */}
             <div>
@@ -156,7 +141,7 @@ export default function SubmitPage() {
               />
             </div>
 
-            {/* File Upload */}
+            {/* File */}
             <div>
               <label className="block mb-2 text-sm text-gray-300">
                 Upload File (optional)
@@ -167,13 +152,10 @@ export default function SubmitPage() {
               />
             </div>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 py-3 rounded-xl hover:scale-105 hover:shadow-lg transition text-lg font-semibold"
-            >
+            {/* Button */}
+            <Button>
               Submit Grievance
-            </button>
+            </Button>
 
           </form>
         )}
