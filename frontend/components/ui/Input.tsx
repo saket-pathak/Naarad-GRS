@@ -1,4 +1,4 @@
-import type { ChangeEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 
 type InputProps = {
   label: string;
