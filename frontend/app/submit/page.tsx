@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Toast from "@/components/ui/Toast";
@@ -20,7 +21,7 @@ export default function SubmitPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -29,7 +30,7 @@ export default function SubmitPage() {
     setOpen(false);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.category || !form.title || !form.description) {
